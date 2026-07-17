@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const usermodel = require("./model/usermodel");
+const productmodel = require("./model/productmodel")
 const PORT = 3000;
 
 app.get("/", (req, res) => {
