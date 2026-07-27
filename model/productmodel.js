@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema({
   productname: String,
-  images: String,
+  image: String,
   price: Number,
-  discout: {
+  discount: {
     type: Number,
     default: 0,
   },

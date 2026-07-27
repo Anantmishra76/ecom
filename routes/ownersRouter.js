@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const ownerModel = require("../model/ownersmodel");
 
-router.get("/", (req, res) => {
+router.get("/admin", (req, res) => {
   res.send("Hey This is base route for owner router ");
 });
+
 router.post("/create", async (req, res) => {
   let owners = await ownerModel.find();
   if (owners.length > 0) {

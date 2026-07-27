@@ -4,7 +4,7 @@ const isLoggedin = require("../middlewares/isLoggedin");
 
 router.get("/", (req, res) => {
   let error = req.flash("error");
-  req.render("index", { error });
+  res.render("index", { error });
 });
 
 router.get("/shop", isLoggedin, (req, res) => {
