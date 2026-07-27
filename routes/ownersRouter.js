@@ -10,7 +10,9 @@ router.post("/create", async (req, res) => {
   if (owners.length > 0) {
     return res
       .status(504)
-      .send("you have not permission to create a new owner ");
+      .send(
+        "you have not permission to create a new owner beacuse there is only one owner",
+      );
   }
 
   let { name, email, password } = req.body;
@@ -23,4 +25,3 @@ router.post("/create", async (req, res) => {
 });
 
 module.exports = router;
-
