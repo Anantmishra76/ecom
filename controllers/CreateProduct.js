@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const product = await productModel.create({
       productname: req.body.productname,
-      image: req.file.buffer,
+      image: "/uploads/" + req.file.filename,
       price: Number(req.body.price),
       discount: Number(req.body.discount),
       bgcolor: req.body.bgcolor,

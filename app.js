@@ -10,6 +10,7 @@ const productmodel = require("./model/productmodel");
 const ownersRouter = require("./routes/ownersRouter");
 const usersRouter = require("./routes/usersRouter");
 const productsRouter = require("./routes/productsRouter");
+const indexRouter = require("./routes/index");
 
 require("dotenv").config();
 
@@ -28,9 +29,10 @@ app.use(
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.set("view engine", "ejs");
 
+app.use("/", indexRouter);
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
