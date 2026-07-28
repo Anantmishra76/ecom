@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const expressSession = require("express-session");
 const flash = require("connect-flash");
+const cors = require("cors");
 
 const usermodel = require("./model/usermodel");
 const productmodel = require("./model/productmodel");
@@ -26,11 +27,16 @@ app.use(
     secret: process.env.EXPRESS_SESSION_SECRET,
   }),
 );
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
-app.set("view engine", "ejs");
 
 app.use("/", indexRouter);
 app.use("/owners", ownersRouter);

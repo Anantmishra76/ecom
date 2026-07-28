@@ -4,8 +4,9 @@ const isLoggedin = require("../middlewares/isLoggedin");
 const productmodel = require("../model/productmodel");
 
 router.get("/", (req, res) => {
-  let error = req.flash("error");
-  res.render("index", { error });
+  res.json({
+    message: "Backend is running successfully",
+  });
 });
 
 router.get("/shop", isLoggedin, async (req, res) => {
