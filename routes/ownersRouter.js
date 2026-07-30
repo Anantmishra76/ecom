@@ -1,28 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const ownerModel = require("../model/ownersmodel");
+const {
+  ownerDashboard,
+  registerOwner,
+  loginOwner,
+} = require("../controllers/owner-controller");
 
-router.get("/admin", (req, res) => {
-  res.send("Hey This is base route for owner router ");
-});
-
-router.post("/create", async (req, res) => {
-  let owners = await ownerModel.find();
-  if (owners.length > 0) {
-    return res
-      .status(504)
-      .send(
-        "you have not permission to create a new owner beacuse there is only one owner",
-      );
-  }
-
-  let { name, email, password } = req.body;
-  let createdowner = await ownerModel.create({
-    name,
-    email,
-    password,
-  });
-  res.status(201).send(createdowner);
-});
+router.get("/dashboard", ownerDashboard);
+router.post("/register", registerOwner);
+router.post("/login", loginOwner);
 
 module.exports = router;

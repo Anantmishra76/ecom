@@ -8,7 +8,7 @@ module.exports.registerUser = async (req, res) => {
 
     let user = await usermodel.findOne({ email: email });
     if (user)
-      return res.status(401).send("You already have  an account plsss login");
+      return res.status(401).send("You already have an account plsss login");
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) return res.status(500).send(err.message);
@@ -49,7 +49,7 @@ module.exports.loginUser = async (req, res) => {
     if (result) {
       let token = generatetoken(user);
       res.cookie("token", token);
-      res.send("you can login ");
+      res.send("logged in successfully  ");
     } else {
       return res.send("email or password inccorect");
     }

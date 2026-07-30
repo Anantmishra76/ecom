@@ -11,6 +11,7 @@ const productmodel = require("./model/productmodel");
 const ownersRouter = require("./routes/ownersRouter");
 const usersRouter = require("./routes/usersRouter");
 const productsRouter = require("./routes/productsRouter");
+const cartRouter = require("./routes/cartRouter");
 const indexRouter = require("./routes/index");
 
 require("dotenv").config();
@@ -19,12 +20,12 @@ const db = require("./config/mongoose-connection");
 const PORT = 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   expressSession({
     secret: process.env.EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    secret: process.env.EXPRESS_SESSION_SECRET,
   }),
 );
 app.use(
@@ -34,14 +35,14 @@ app.use(
   }),
 );
 app.use(flash());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 app.use("/", indexRouter);
-app.use("/owners", ownersRouter);
-app.use("/users", usersRouter);
-app.use("/products", productsRouter);
+app.use("/api/auth", usersRouter);
+app.use("/api/owner", ownersRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/cart", cartRouter);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is running on ${PORT}`);
