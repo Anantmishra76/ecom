@@ -18,7 +18,8 @@ module.exports = async function (req, res, next) {
     if (!owner) {
       return res.status(403).json({
         success: false,
-        message: "Access denied",
+        message:
+          "Access denied because you not owner only owner can add the products",
       });
     }
 

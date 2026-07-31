@@ -2,21 +2,32 @@ const jwt = require("jsonwebtoken");
 const usermodel = require("../model/usermodel");
 
 module.exports = async function (req, res, next) {
-  if (!req.cookies.token) {
-    req.flash("error", "you need to login first ");
-    return res.redirect("/");
-  }
-
   try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Plss login first",
+      });
+    }
+
     let decoded = jwt.verify(req.cookies.token, process.env.JWT_KEY);
     let user = await usermodel
       .findOne({ email: decoded.email })
       .select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: " USer not found",
+      });
+    }
     req.user = user;
     next();
   } catch (err) {
-    req.flash("error", "Something went wrong");
-    return res.redirect("/");
+    return res.status(401).json({
+      success: false,
+      message: "Invalid or Expired token",
+    });
   }
 };
-

@@ -38,7 +38,7 @@ app.use(flash());
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
 app.use("/api/auth", usersRouter);
 app.use("/api/owner", ownersRouter);
 app.use("/api/products", productsRouter);
