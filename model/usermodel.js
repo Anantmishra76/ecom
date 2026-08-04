@@ -6,8 +6,16 @@ const UserSchema = mongoose.Schema({
   password: String,
   cart: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "product",
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "product",
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+        min: 1,
+      },
     },
   ],
 
