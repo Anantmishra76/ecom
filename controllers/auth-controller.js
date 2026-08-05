@@ -65,3 +65,4 @@ module.exports.logout = (req, res) => {
     message: "logout successfully ",
   });
 };
+
