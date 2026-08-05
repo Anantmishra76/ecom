@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const usermodel = require("../model/usermodel");
 const { generatetoken } = require("../utils/generatetoken");
 
+
+
 module.exports.registerUser = async (req, res) => {
   try {
     let { name, email, password } = req.body;
